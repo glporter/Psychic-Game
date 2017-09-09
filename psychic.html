@@ -2,21 +2,8 @@
 <html lang="en-us">
 
 <head>
-    <!-- This application randomly picks a letter, and the user has to guess which letter the app chose. It displays the following information for the 
-    user:
-    Wins: (# of times the user has guessed the letter correctly)
-    Losses: (# of times the user has failed to guess the letter correctly after exhausting all guesses)
-    Guesses Left: (# of guesses left. This will update)
-    Your Guesses so far: (the specific letter that the user typed. Display these until the user either wins or loses)
-    When the player wins, increase the Wins counter and start the game over again (without refreshing the page)
-    When the player loses, increase the Losses counter and restart the game without a page refresh (just like when the user winds)
--->
-
-
     <meta charset="UTF-8">
     <title>Guess what letter I'm thinking about?</title>
-
-
 </head>
 
 <body>
@@ -49,9 +36,6 @@
         var lossCount = document.getElementById("loss-count");
         var guessCount = document.getElementById("guess-count");
 
-        // Event handler for keyboard key presses
-        // It displays the pressed key and if it is matches a letter guess, then the user wins and gets a point. 
-        // The user as 26 chances to guess a letter
         document.onkeypress = function(event) {
                 userText.textContent = "KEY PRESSED";
 
@@ -78,14 +62,21 @@
             } //end function (event)
 
 
-        // Event handler for the keyboard key up event
-        // It counts the number of guesses and if it reaches the max allowed, it calls the 
-        // gameover function   
         document.onkeyup = function(event) {
 
                 if (guess > 25) {
                     gameOver();
-
+                    /*
+                    guess = 0;
+                    userText = '';
+                    userText.textContent = '';
+                    winCount = 0;
+                    winCount.textContent = 0;
+                    lossCount = 0;
+                    lossCount.textContent = 0;
+                    guessCount = 0;
+                    guessCount.textContent = 0;
+                    */
                 }
                 guess++;
                 guessesLeft--;
@@ -94,9 +85,6 @@
             } //end function(event)
 
 
-
-        // The gameOver() function lets the user know whether or not he/she won or not.
-        // It posts the stats of Wins and instructs the user to refresh the browser to play again.    
         function gameOver() {
             //alert("Branched to the resetGame function...")
             console.log("winCount = " + winCount.textContent);
@@ -106,10 +94,26 @@
                 alert("Congratulations! You got " + winCount.textContent + " right. Refresh the browser to play the game again.");
             }
 
+            /*
+            maxTries = 10;
+            winTotal = 0;
+            lossTotal = 0;
+            letterPicked = '';
+            winCount = 0;
+            lossCount = 0;
+            guess = 0;
+            text = '';
+            guessesLeft = 25;
+            document.getElementById("user-text").innerHTML = "";
+            document.getElementById("win-count").innerHTML = "";
+            document.getElementById("loss-count").innerHTML = "";
+            document.getElementById("guess-count").innerHTML = "";
+            lossTotal = 0;
+            guessCount = 0;
+            guessesLeft = 25;
+            */
         }
 
-        // The rand() function returns a random number between 1 and 26 for the game "engine" to pick an arbitrary  letter between a-z for the 
-        // game user to guess.
         function rand() {
             return (Math.floor((Math.random() * 26) + 1));
         }
